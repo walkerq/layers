@@ -49,8 +49,8 @@ app.get('/layerlist', function(req, res) {
 	  function(err,rows){
 	    if(err) throw err
 	    console.log('SELECT ran successfully\n');
-	    console.log(rows); //here lies the problem: our model is directly modifying the view.
-	    res.json(rows);	 //dunno what this line does. it should be sending the data to the controller.
+	    console.log(rows);
+	    res.json(rows);
 	    } 
 	)
 
@@ -76,17 +76,6 @@ app.post('/layerlist', function (req, res) {
 	  }
 	)
 });
-
-	/*
-	con.query(
-	  'SELECT * FROM layer',
-	  function(err,rows){
-	    if(err) throw err
-	    console.log('SELECT ran successfully\n');
-	    console.log(rows); //here lies the problem: our model is directly modifying the view.
-	    res.json(rows);	 //dunno what this line does. it should be sending the data to the controller.
-	    } 
-	)*/
 
 //Insert a User
 if (insertUser == true) {
