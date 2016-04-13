@@ -53,7 +53,7 @@ CREATE TABLE `Layers_Project`.`Layer` (
   `Length_of_Layer` INT(11) NOT NULL COMMENT 'Time in seconds',
   `Created_Date` DATETIME NOT NULL,
   `FileLayer` VARCHAR(45) NOT NULL COMMENT 'Represents relative path to file',
-  `Username` VARCHAR(45) NULL DEFAULT NULL,
+  `Username` VARCHAR(45) NULL,
   PRIMARY KEY (`LayerID`),
   INDEX `Username_idx` (`Username` ASC),
   CONSTRAINT `Username`
@@ -280,7 +280,7 @@ DELIMITER $$
 CREATE PROCEDURE insert_layer(IN InputLayerName VARCHAR(45),
 								InputLength_of_Layer INT(11), 
                                 InputFileLayer VARCHAR(45), 
-                                InputUsername INT)
+                                InputUsername VARCHAR(45))
  BEGIN
 	INSERT INTO Layer(LayerName, Length_of_Layer, FileLayer, Username)
     VALUES(InputLayerName, InputLength_of_Layer, InputFileLayer, InputUsername);
