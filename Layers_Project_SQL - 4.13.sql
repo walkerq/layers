@@ -408,6 +408,42 @@ VALUES ("#awesome");
 INSERT INTO Hashtag (Hashtag)
 VALUES ("#favoritesongever");
 
+INSERT INTO Hashtag (Hashtag)
+VALUES ("#goodbeat");
+
+INSERT INTO Hashtag (Hashtag)
+VALUES ("#nicelyrics");
+
+INSERT INTO Hashtag (Hashtag)
+VALUES ("#vocalsarekillingit");
+
+INSERT INTO Hashtag (Hashtag)
+VALUES ("#inlove");
+
+INSERT INTO Hashtag (Hashtag)
+VALUES ("#makemoremusic");
+
+INSERT INTO Hashtag (Hashtag)
+VALUES ("#djstyle");
+
+INSERT INTO Hashtag (Hashtag)
+VALUES ("#thissongisdabest");
+
+INSERT INTO Hashtag (Hashtag)
+VALUES ("#coolio");
+
+INSERT INTO Hashtag (Hashtag)
+VALUES ("#someaningful");
+
+INSERT INTO Hashtag (Hashtag)
+VALUES ("#rad");
+
+INSERT INTO Hashtag (Hashtag)
+VALUES ("#whatjusthappened");
+
+INSERT INTO Hashtag (Hashtag)
+VALUES ("#djinthehizhouse");
+
 
 /*User Examples */
 INSERT INTO User (Username, Age, Country)
@@ -424,6 +460,28 @@ VALUES ("lilybilly", 15, "United States of America");
 
 INSERT INTO User (Username, Age, Country)
 VALUES ("tammywilliams", 27, "Canada");
+
+INSERT INTO User (Username, Age, Country)
+VALUES ("mandyyho", 17, "Australia");
+
+INSERT INTO User (Username, Age, Country)
+VALUES ("liorfleish", 36, "Israel");
+
+INSERT INTO User (Username, Age, Country)
+VALUES ("lizzymcguire", 36, "United States of America");
+
+INSERT INTO User (Username, Age, Country)
+VALUES ("angelbatista", 36, "Cuba");
+
+INSERT INTO User (Username, Age, Country)
+VALUES ("dextermorgan", 36, "Iceland");
+
+INSERT INTO User (Username, Age, Country)
+VALUES ("debmorgan", 36, "Greece");
+
+INSERT INTO User (Username, Age, Country)
+VALUES ("joeyquinn", 36, "Italy");
+
 
 
 /* Layer Examples */
@@ -442,6 +500,42 @@ VALUES ("Classical Violin", 170, "classicalviolin.mp3", "caseysamuels");
 INSERT INTO Layer (LayerName, Length_of_Layer, FileLayer, Username)
 VALUES ("Blues Base", 30, "bluesbase.mp3", "caseysamuels");
 
+INSERT INTO Layer (LayerName, Length_of_Layer, FileLayer, Username)
+VALUES ("Work", 130, "work.mp3", "angelbatista");
+
+INSERT INTO Layer (LayerName, Length_of_Layer, FileLayer, Username)
+VALUES ("7 Years", 150, "7years.mp3", "angelbatista");
+
+INSERT INTO Layer (LayerName, Length_of_Layer, FileLayer, Username)
+VALUES ("Love Yourself", 140, "loveyourself.mp3", "angelbatista");
+
+INSERT INTO Layer (LayerName, Length_of_Layer, FileLayer, Username)
+VALUES ("Stressed Out", 170, "stressedout.mp3", "angelbatista");
+
+INSERT INTO Layer (LayerName, Length_of_Layer, FileLayer, Username)
+VALUES ("Stressed Out Beat", 170, "stressedoutbeat.mp3", "joeyquinn");
+
+INSERT INTO Layer (LayerName, Length_of_Layer, FileLayer, Username)
+VALUES ("Stressed Out Vocals", 160, "stressedoutvocals.mp3", "joeyquinn");
+
+INSERT INTO Layer (LayerName, Length_of_Layer, FileLayer, Username)
+VALUES ("Stressed Out Beat2", 170, "stressedoutbeat2.mp3", "joeyquinn");
+
+INSERT INTO Layer (LayerName, Length_of_Layer, FileLayer, Username)
+VALUES ("Stressed Out Instruments", 170, "stressedoutinstruments.mp3", "joeyquinn");
+
+INSERT INTO Layer (LayerName, Length_of_Layer, FileLayer, Username)
+VALUES ("7 Years Beat", 150, "7yearsbeat.mp3", "dextermorgan");
+
+INSERT INTO Layer (LayerName, Length_of_Layer, FileLayer, Username)
+VALUES ("7 Years Vocals", 140, "7yearsvocals.mp3", "debmorgan");
+
+INSERT INTO Layer (LayerName, Length_of_Layer, FileLayer, Username)
+VALUES ("7 Years Instruments", 150, "7yearsinstruments.mp3", "debmorgan");
+
+INSERT INTO Layer (LayerName, Length_of_Layer, FileLayer, Username)
+VALUES ("7 Years Beat2", 150, "7yearsbeat2.mp3", "dextermorgan");
+
 
 /* Layer Junction Examples */
 INSERT INTO Layer_Junction (BaseLayerID, LinkedLayerID)
@@ -459,6 +553,36 @@ VALUES (2, 5);
 INSERT INTO Layer_Junction (BaseLayerID, LinkedLayerID)
 VALUES (3, 5);
 
+INSERT INTO Layer_Junction (BaseLayerID, LinkedLayerID)
+VALUES (9, 10);
+
+INSERT INTO Layer_Junction (BaseLayerID, LinkedLayerID)
+VALUES (9, 11);
+
+INSERT INTO Layer_Junction (BaseLayerID, LinkedLayerID)
+VALUES (9, 12);
+
+INSERT INTO Layer_Junction (BaseLayerID, LinkedLayerID)
+VALUES (9, 13);
+
+INSERT INTO Layer_Junction (BaseLayerID, LinkedLayerID)
+VALUES (7, 14);
+
+INSERT INTO Layer_Junction (BaseLayerID, LinkedLayerID)
+VALUES (7, 15);
+
+INSERT INTO Layer_Junction (BaseLayerID, LinkedLayerID)
+VALUES (7, 16);
+
+INSERT INTO Layer_Junction (BaseLayerID, LinkedLayerID)
+VALUES (7, 17);
+
+INSERT INTO Layer_Junction (BaseLayerID, LinkedLayerID)
+VALUES (17, 14);
+
+INSERT INTO Layer_Junction (BaseLayerID, LinkedLayerID)
+VALUES (12, 10);
+
 
 /* Hashtag_Layer Examples */
 INSERT INTO Hashtag_Layer (Hashtag, LayerID)
@@ -473,26 +597,98 @@ VALUES ("#awesome", 2);
 INSERT INTO Hashtag_Layer (Hashtag, LayerID)
 VALUES ("#socool", 5);
 
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#someaningful", 6);
+
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#rad", 6);
+
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#thissongisdabest", 6);
+
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#whatjusthappened", 6);
+
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#whatjusthappened", 7);
+
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#rad", 7);
+
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#whatjusthappened", 8);
+
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#socool", 8);
+
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#whatjusthappened", 9);
+
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#thissongisdabest", 9);
+
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#djinthehizhouse", 9);
+
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#whatjusthappened", 10);
+
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#whatjusthappened", 11);
+
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#vocalsarekillingit", 11);
+
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#whatjusthappened", 12);
+
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#thissongisdabest", 12);
+
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#coolio", 12);
+
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#coolio", 13);
+
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#coolio", 14);
+
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#whatjusthappened", 15);
+
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#rad", 15);
+
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#whatjusthappened", 16);
+
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#whatjusthappened", 17);
+
+INSERT INTO Hashtag_Layer (Hashtag, LayerID)
+VALUES ("#djstyle", 17);
 
 
 /* TESTS THAT TRIGGERS WORK --------------------------------------------------- */
 
-/* TEST that trigger error for usernames do not contain spaces works */
+/* TEST that trigger error for usernames do not contain spaces works 
 INSERT INTO User (Username, Age, Country)
 VALUES ("sam smith", 20, "United States of America");
 
-/* TEST that trigger error for hashtags start with # works */
+/* TEST that trigger error for hashtags start with # works 
 INSERT INTO Hashtag (Hashtag)
 VALUES ("socool");
 
-/* TEST that trigger error for hashtags do not contain spaces works */
+/* TEST that trigger error for hashtags do not contain spaces works 
 INSERT INTO Hashtag (Hashtag)
 VALUES ("#so cool");
 
-/* TEST that trigger error for file that is not an mp3 */
+/* TEST that trigger error for file that is not an mp3 
 INSERT INTO Layer (LayerName, Length_of_Layer, FileLayer)
 VALUES ("Blues Base", 30, "bluesbase.mp4");
 
-/* TEST that trigger error for negative layer length works */
+/* TEST that trigger error for negative layer length works 
 INSERT INTO Layer (LayerName, Length_of_Layer, FileLayer)
 VALUES ("Sorry_Beat", -60, "sorrybeat.mp3");
+*/
