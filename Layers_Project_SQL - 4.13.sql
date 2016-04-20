@@ -8,21 +8,21 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- Schema mydb
 -- -----------------------------------------------------
 -- -----------------------------------------------------
--- Schema Layers_Project
+-- Schema layers_project
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema Layers_Project
+-- Schema layers_project
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `Layers_Project`;
-CREATE SCHEMA IF NOT EXISTS `Layers_Project` DEFAULT CHARACTER SET latin1 ;
-USE `Layers_Project` ;
+DROP SCHEMA IF EXISTS `layers_project`;
+CREATE SCHEMA IF NOT EXISTS `layers_project` DEFAULT CHARACTER SET latin1 ;
+USE `layers_project` ;
 
 -- -----------------------------------------------------
--- Table `Layers_Project`.`Hashtag`
+-- Table `layers_project`.`Hashtag`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Layers_Project`.`Hashtag`;
-CREATE TABLE `Layers_Project`.`Hashtag` (
+DROP TABLE IF EXISTS `layers_project`.`Hashtag`;
+CREATE TABLE `layers_project`.`Hashtag` (
   `Hashtag` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`Hashtag`),
   UNIQUE INDEX `Hashtag_UNIQUE` (`Hashtag` ASC))
@@ -31,10 +31,10 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `Layers_Project`.`User`
+-- Table `layers_project`.`User`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Layers_Project`.`User`;
-CREATE TABLE `Layers_Project`.`User` (
+DROP TABLE IF EXISTS `layers_project`.`User`;
+CREATE TABLE `layers_project`.`User` (
   `Username` VARCHAR(45) NOT NULL UNIQUE,
   `Age` INT(3) UNSIGNED NOT NULL,
   `Country` ENUM('Afghanistan','Albania','Algeria','Andorra','Angola','Antigua and Barbuda','Argentina','Armenia','Australia','Austria','Azerbaijan','Bahamas','Bahrain','Bangladesh','Barbados','Belarus','Belgium','Belize','Benin','Bhutan','Bolivia','Bosnia and Herzegovina','Botswana','Brazil','Brunei Darussalam','Bulgaria','Burkina Faso','Burundi','Cabo Verde','Cambodia','Cameroon','Canada','Central African Republic','Chad','Chile','China','Colombia','Comoros','Congo','Costa Rica','Côte dIvoire','Croatia','Cuba','Cyprus','Czech Republic','Democratic Peoples Republic of Korea (North Korea)','Democratic Republic of the Cong','Denmark','Djibouti','Dominica','Dominican Republic','Ecuador','Egypt','El Salvador','Equatorial Guinea','Eritrea','Estonia','Ethiopia','Fiji','Finland','France','Gabon','Gambia','Georgia','Germany','Ghana','Greece','Grenada','Guatemala','Guinea','Guinea-Bissau','Guyana','Haiti','Honduras','Hungary','Iceland','India','Indonesia','Iran','Iraq','Ireland','Israel','Italy','Jamaica','Japan','Jordan','Kazakhstan','Kenya','Kiribati','Kuwait','Kyrgyzstan','Lao Peoples Democratic Republic (Laos)','Latvia','Lebanon','Lesotho','Liberia','Libya','Liechtenstein','Lithuania','Luxembourg','Macedonia','Madagascar','Malawi','Malaysia','Maldives','Mali','Malta','Marshall Islands','Mauritania','Mauritius','Mexico','Micronesia (Federated States of)','Monaco','Mongolia','Montenegro','Morocco','Mozambique','Myanmar','Namibia','Nauru','Nepal','Netherlands','New Zealand','Nicaragua','Niger','Nigeria','Norway','Oman','Pakistan','Palau','Panama','Papua New Guinea','Paraguay','Peru','Philippines','Poland','Portugal','Qatar','Republic of Korea (South Korea)','Republic of Moldova','Romania','Russian Federation','Rwanda','Saint Kitts and Nevis','Saint Lucia','Saint Vincent and the Grenadines','Samoa','San Marino','Sao Tome and Principe','Saudi Arabia','Senegal','Serbia','Seychelles','Sierra Leone','Singapore','Slovakia','Slovenia','Solomon Islands','Somalia','South Africa','South Sudan','Spain','Sri Lanka','Sudan','Suriname','Swaziland','Sweden','Switzerland','Syrian Arab Republic','Tajikistan','Thailand','Timor-Leste','Togo','Tonga','Trinidad Tobago','Tunisia','Turkey','Turkmenistan','Tuvalu','Uganda','Ukraine','United Arab Emirates','United Kingdom of Great Britain and Northern Ireland','United Republic of Tanzania','United States of America','Uruguay','Uzbekistan','Vanuatu','Venezuela','Vietnam','Yemen','Zambia','Zimbabwe') NOT NULL,
@@ -44,10 +44,10 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `Layers_Project`.`Layer`
+-- Table `layers_project`.`Layer`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Layers_Project`.`Layer`;
-CREATE TABLE `Layers_Project`.`Layer` (
+DROP TABLE IF EXISTS `layers_project`.`Layer`;
+CREATE TABLE `layers_project`.`Layer` (
   `LayerID` INT(11) NOT NULL AUTO_INCREMENT,
   `LayerName` VARCHAR(45) NOT NULL,
   `Length_of_Layer` INT(11) NOT NULL COMMENT 'Time in seconds',
@@ -58,7 +58,7 @@ CREATE TABLE `Layers_Project`.`Layer` (
   INDEX `Username_idx` (`Username` ASC),
   CONSTRAINT `Username`
     FOREIGN KEY (`Username`)
-    REFERENCES `Layers_Project`.`User` (`Username`)
+    REFERENCES `layers_project`.`User` (`Username`)
     ON DELETE SET NULL
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -66,22 +66,23 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `Layers_Project`.`Hashtag_Layer`
+-- Table `layers_project`.`Hashtag_Layer`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Layers_Project`.`Hashtag_Layer`;
-CREATE TABLE `Layers_Project`.`Hashtag_Layer` (
+DROP TABLE IF EXISTS `layers_project`.`Hashtag_Layer`;
+CREATE TABLE `layers_project`.`Hashtag_Layer` (
+  `HashtagLayerID` INT(11) NOT NULL AUTO_INCREMENT,
   `Hashtag` VARCHAR(45) NOT NULL,
   `LayerID` INT(11) NOT NULL,
-  PRIMARY KEY (`Hashtag`, `LayerID`),
+  PRIMARY KEY (`HashtagLayerID`),
   INDEX `LayerID_idx` (`LayerID` ASC),
   CONSTRAINT `Hashtag`
     FOREIGN KEY (`Hashtag`)
-    REFERENCES `Layers_Project`.`Hashtag` (`Hashtag`)
+    REFERENCES `layers_project`.`Hashtag` (`Hashtag`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `LayerID`
     FOREIGN KEY (`LayerID`)
-    REFERENCES `Layers_Project`.`Layer` (`LayerID`)
+    REFERENCES `layers_project`.`Layer` (`LayerID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -89,28 +90,29 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `Layers_Project`.`Layer_Junction`
+-- Table `layers_project`.`Layer_Junction`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Layers_Project`.`Layer_Junction`;
-CREATE TABLE `Layers_Project`.`Layer_Junction` (
+DROP TABLE IF EXISTS `layers_project`.`Layer_Junction`;
+CREATE TABLE `layers_project`.`Layer_Junction` (
+  `LinkedLayerJunctionID` INT(11) NOT NULL AUTO_INCREMENT,
   `BaseLayerID` INT(11) NOT NULL,
   `LinkedLayerID` INT(11) NOT NULL,
-  PRIMARY KEY (`BaseLayerID`, `LinkedLayerID`),
+  PRIMARY KEY (`LinkedLayerJunctionID`),
   INDEX `LinkedLayerID_idx` (`LinkedLayerID` ASC),
   CONSTRAINT `BaseLayerID`
     FOREIGN KEY (`BaseLayerID`)
-    REFERENCES `Layers_Project`.`Layer` (`LayerID`)
+    REFERENCES `layers_project`.`Layer` (`LayerID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `LinkedLayerID`
     FOREIGN KEY (`LinkedLayerID`)
-    REFERENCES `Layers_Project`.`Layer` (`LayerID`)
+    REFERENCES `layers_project`.`Layer` (`LayerID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
-use Layers_Project;
+use layers_project;
 
 /* TRIGGERS TO ENSURE DATA INTEGRITY --------------------------------------- */
 
