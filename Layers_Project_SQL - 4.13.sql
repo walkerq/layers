@@ -84,7 +84,9 @@ CREATE TABLE `layers_project`.`Hashtag_Layer` (
     FOREIGN KEY (`LayerID`)
     REFERENCES `layers_project`.`Layer` (`LayerID`)
     ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON UPDATE CASCADE,
+  CONSTRAINT `UniqueHashtagLayer`
+    UNIQUE (`Hashtag`,`LayerID`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
@@ -108,7 +110,9 @@ CREATE TABLE `layers_project`.`Layer_Junction` (
     FOREIGN KEY (`LinkedLayerID`)
     REFERENCES `layers_project`.`Layer` (`LayerID`)
     ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON UPDATE CASCADE,
+  CONSTRAINT `UniqueLinkedLayer`
+    UNIQUE (`BaseLayerID`,`LinkedLayerID`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
