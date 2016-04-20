@@ -369,11 +369,10 @@ CREATE PROCEDURE insert_layer_junction(IN InputBaseLayerID INT,
   /* To delete a Layer Junction */
 DROP PROCEDURE IF EXISTS delete_layer_junction;
 DELIMITER $$
-CREATE PROCEDURE delete_layer_junction(IN InputBaseLayerID INT,
-									InputLinkedLayerID INT)
+CREATE PROCEDURE delete_layer_junction(IN InputLinkedLayerJunctionID INT)
  BEGIN
 	DELETE FROM Layer_Junction
-	WHERE (BaseLayerID = InputBaseLayerID AND LinkedLayerID = InputLinkedLayerID);
+	WHERE (LinkedLayerJunctionID = InputLinkedLayerJunctionID);
  END $$
  DELIMITER ;
 
@@ -393,11 +392,10 @@ CREATE PROCEDURE insert_hashtag_layer(IN InputHashtag VARCHAR(45),
   /* To delete a Hashtag Layer */
 DROP PROCEDURE IF EXISTS delete_hashtag_layer;
 DELIMITER $$
-CREATE PROCEDURE delete_hashtag_layer(IN InputHashtag VARCHAR(45),
-											InputLayerID INT)
+CREATE PROCEDURE delete_hashtag_layer(IN InputHashtagLayerID INT)
  BEGIN
 	DELETE FROM Hashtag_Layer
-	WHERE (Hashtag = InputHashtag AND LayerID = InputLayerID);
+	WHERE (HashtagLayerID = InputHashtagLayerID);
  END $$
  DELIMITER ;
 
