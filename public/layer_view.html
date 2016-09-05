@@ -1,0 +1,82 @@
+<!DOCTYPE>
+<html ng-app="myApp">
+<head>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<title>Layer View</title>
+	<body>
+
+		<div class="container" ng-controller="LayerDetailCtrl">
+
+			<h1><a href="#/layers/"><strong>Layers</strong></a></h1>
+
+
+			<h2>Layer {{thisLayer.data[0][0].LayerID}} {{thisLayer.data[0][0].LayerName}}: by {{thisLayer.data[0][0].Username}}</h2>
+
+			<p>Length of layer: {{thisLayer.data[0][0].Length_of_Layer}} seconds</p>
+			<p>Created: {{thisLayer.data[0][0].Created_Date | date:'medium'}}</p>
+
+			<audio controls>
+			  <source src="/music/et__-_02_-_Kopeika.mp3" type="audio/mp3">
+			Your browser does not support the audio element.
+			</audio>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Hashtags</th>
+					</tr>
+					<tr>
+						<td><input class="form-control" ng-model="hashtag_input"></td>
+						<td><button class="btn btn-primary" ng-click="addHashtag(thisLayer.data[0][0].LayerID, hashtag_input)">Add</button></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="hashtag in thisLayer.data[3]">
+						<td>{{hashtag.Hashtag}}</td>
+						<td><button class="btn btn-success" ng-click="deleteHashtag(hashtag.HashtagLayerID)">Remove</button></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Linked Layers</th>
+					</tr>
+				</thead>
+				<tbody>
+
+ 					<tr><td>Superlayers:</td></tr>
+
+					<tr ng-repeat="layer in thisLayer.data[1]">
+						<td><a href="#/layers/{{layer.BaseLayerID}}">{{layer.LayerName}}</a></td>
+					</tr>
+
+ 					<tr><td>Sublayers:</td></tr>
+ 
+					<tr ng-repeat="layer in thisLayer.data[2]">
+						<td><a href="#/layers/{{layer.LinkedLayerID}}">{{layer.LayerName}}</a></td>
+					</tr>
+
+					<tr>
+ 						<td><input class="form-control" ng-model="sublayer_input"></td>
+ 						<td><button class="btn btn-primary" ng-click="addLinkedLayer()">Link Sublayer by ID</button>
+ 						 <a href="#/layers/">(See layer IDs)</a></td>
+ 					</tr>
+				</tbody>
+			</table>
+		</div>
+	</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.js"></script>
+<script src="controllers/app.js"></script>
+	</body>
+</head>
+</html>

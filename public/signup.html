@@ -1,0 +1,35 @@
+<!DOCTYPE>
+<html ng-app="myApp">
+<head>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<title>User View</title>
+	<body>
+		<div class="container" ng-controller="SignUpCtrl">
+
+			<h1><a href="#/layers/"><strong>Layers</strong></a></h1>
+
+			<h3>Welcome to Layers! Layers is an open-source, collaborative platform for creating and sharing music. Here at Layers, everyone is an artist, and layers contain references to the subcomponent layers necessary to remix them - so no more reverse engineering instrumentals or manually stripping away vocals!
+			<br><br>
+			Just provide the following information to join the community!</h3>
+
+			<h3>Artist (that's you!): <input class="form-control" ng-model="signUpUser.Username"></h3>
+			<h3>Age: <input class="form-control" ng-model="signUpUser.age"></input></h3>
+			<h3>Country: <input class="form-control" ng-model="signUpUser.country"></input></h3>
+			<button class='btn btn-warning' ng-click="signUp(signUpUser); showWelcome = !showWelcome">Sign-up!</button>
+			<h3 ng-init="showWelcome = false" ng-show="showWelcome">Hey {{signUpUser.Username}} - welcome to Layers!
+			<a href="#/layers">Let's get started!"</a></h3>
+		</div>
+	</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.js"></script>
+<script src="controllers/app.js"></script>
+	</body>
+</head>
+</html>

@@ -2,16 +2,27 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var mysql = require("mysql");
+// var createjs = require("createjs-soundjs")
 
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 
-// First you need to create a connection to the db
+//do music stuff:
+/*createjs.Sound.on("fileload", handleLoadComplete);
+createjs.Sound.alternateExtensions = ["mp3"];
+createjs.Sound.registerSound({src:"public/music/Nikes.mp3", id:"nikes"});
+function handleLoadComplete(event) {
+    createjs.Sound.play("nikes");
+}
+*/
+
+//Creates connection to the MySQL database
 var con = mysql.createConnection({
   host: "127.0.0.1",
   user: "root",
-  password: "sesame",
-  database: "layers_project"
+  password: "sesame", //***NOTE: CHANGE THIS TO YOUR MYSQL PASSWORD***
+  database: "layers_project",
+  multipleStatements: "true"
 });
 
 con.connect(function(err){
@@ -22,151 +33,122 @@ con.connect(function(err){
   console.log('Connection established'); 
 });
 
-var input_Username = 'test1';
-var input_Password = 'Example1';
-var input_FirstName = 'Example1';
-var input_LastName = 'Example1';
-var input_DOB= '1992-8-07';
-var input_UserID= 6;
-
-var insertUser = false; //these are supposed to be collecting user input
-//check triggers and consider what data validation is necessary
-//test user input against those SQL triggers
-var updateUserUsername = false;
-var updateUserPassword = false;
-var updateUserFirstName = false;
-var updateUserLastName = false;
-var updateUserDOB = false;
-var deleteUser = false;
-
-//TODO: currently this code is being triggered by a get request. it needs to be triggered instead by
-//user input, so it needs to be called by search.
-app.get('/layerlist', function(req, res) {
-	console.log("Model received a GET request");
-
+/* Model Query Handlers (app.get, app.post, or app.put):
+use http objects to receive data from a controller in app.js,
+use Node-MySQL to form database queries, and
+send query results back to controller as JSON */
+app.get('/layers/', function (req, res) {
 	con.query(
-	  'SELECT * FROM layer',
+	  	'SELECT * FROM layer a ',
 	  function(err,rows){
-	    if(err) throw err
-	    console.log('SELECT ran successfully\n');
-	    console.log(rows);
-	    res.json(rows);
-	    } 
-	)
-
-/*	con.end(function(err) {
-  // The connection is terminated gracefully
-  // Ensures all previously enqueued queries are still
-  // before sending a COM_QUIT packet to the MySQL server.
-	});*/
-});
-
-app.post('/layerlist', function (req, res) {
-	console.log(req.body);
-	console.log(req.body.LayerName);
-	console.log(req.body.UserID);
-	con.query(
-	  	'SELECT * FROM Layer WHERE LayerName = \'' + req.body.LayerName + '\'',
-/*		'AND UserID = \'' + ... '\''),
-*/	  function(err,rows){
 	    if(err) throw err;
-	    console.log('here are the results filtered by provided layer name and (not yet) artist:\n');
-	    console.log(rows);
 	    res.json(rows);
 	  }
 	)
 });
 
-//Insert a User
-if (insertUser == true) {
+app.post('/addLayer', function (req, res) {
 	con.query(
-	  'CALL insert_user(?, ?, ?, ?, ?)',
-	  [input_Username,input_Password, input_FirstName, input_LastName, input_DOB],
+	  	'CALL insert_layer(?,?,?,?)',
+	  	[req.body.data[0].LayerName,req.body.data[0].Length_of_Layer,
+	  	req.body.data[0].FileLayer, req.body.data[0].Username],
 	  function(err,rows){
 	    if(err) throw err;
-	    console.log('User inserted into Db\n');
+	    console.log(req.body.LayerName + ' added to the DB\n');
+	  })
+});
+
+app.get('/editLayer/:id', function(req, res) {
+	var id = req.params.id;
+	con.query(
+	  	'SELECT * FROM layer WHERE layerID = ' + id + ";",
+	  function(err,rows){
+	    if(err) throw err;
+	    res.json(rows);
+	  }
+	)
+});
+
+app.post('/deleteHashtag/:id', function (req, res) {
+	con.query(
+	  	'CALL delete_hashtag_layer(?)',
+	  	[req.params.id],
+	  function(err,rows){
+	    if(err) throw err;
 	    console.log(rows);
 	  }
 	)
-};
+});
 
-//Update a User Username
-if (updateUserUsername == true) {
+app.post('/addHashtag/', function (req, res) {
 	con.query(
-	  'CALL update_user_username(?, ?)',
-	  [input_Username,input_UserID],
+	  	'CALL insert_hashtag_layer2(?,?)',
+	  	[req.body.hashtag, req.body.layerID],
 	  function(err,rows){
 	    if(err) throw err;
-	    console.log('Username updated in Db\n');
+	    console.log("hashtag " + req.body.hashtag + " added to layer " + req.body.layerID);
 	    console.log(rows);
 	  }
 	)
-};
+});
 
-//Update a User Password
-if (updateUserPassword == true) {
-	con.query(
-	  'CALL update_user_password(?, ?)',
-	  [input_Password,input_UserID],
+app.get('/layers/:id', function(req, res) {
+	  con.query(
+	  	'SELECT * FROM layer WHERE LayerID = \'' + req.params.id + '\'; \
+	  	SELECT * FROM layer_junction lj JOIN layer l ON lj.BaseLayerID = \
+	  	l.LayerID WHERE LinkedLayerID = \'' + req.params.id + '\'; SELECT \
+	  	* FROM layer_junction lj JOIN layer l ON lj.LinkedLayerID = l.LayerID \
+	  	WHERE BaseLayerID = \'' + req.params.id + '\'; SELECT * FROM \
+	  	hashtag_layer WHERE LayerID = \'' + req.params.id + '\';',
 	  function(err,rows){
 	    if(err) throw err;
-	    console.log('User Password updated in Db\n');
+	    res.json(rows);
+	  }
+	)
+});
+
+app.put('/updateLayer/:id', function (req, res) {
+	con.query(
+	  'CALL update_layer_name(?, ?)',
+	  [req.body.data[0].LayerName, req.body.data[0].LayerID],
+	  function(err,rows){
+	    if(err) throw err;
+	    console.log('Layer name changed');
 	    console.log(rows);
 	  }
 	)
-};
+});
 
-//Update a User First Name
-if (updateUserFirstName == true) {
+app.get('/artists/:Username', function (req, res) {
 	con.query(
-	  'CALL update_user_first_name(?, ?)',
-	  [input_FirstName,input_UserID],
+	  	'SELECT * FROM user WHERE Username = \'' + req.params.Username + '\';',
 	  function(err,rows){
 	    if(err) throw err;
-	    console.log('User First Name updated in Db\n');
-	    console.log(rows);
+	    res.json(rows);
 	  }
 	)
-};
+});
 
-//Update a User Last Name
-if (updateUserLastName == true) {
+app.post('/signUpUser/', function (req, res) {
 	con.query(
-	  'CALL update_user_last_name(?, ?)',
-	  [input_LastName,input_UserID],
+	  	'CALL insert_user(?,?,?)',
+	  	[req.body.Username, req.body.age, req.body.country],
 	  function(err,rows){
 	    if(err) throw err;
-	    console.log('User Last Name updated in Db\n');
-	    console.log(rows);
-	  }
-	)
-};
+	    console.log(req.body.Username + ' added to the DB\n');
+	  })
+});
 
-//Update a User DOB
-if (updateUserDOB == true) {
+app.post('/addLinkedLayer/', function (req, res) {
 	con.query(
-	  'CALL update_user_dob(?, ?)',
-	  [input_DOB,input_UserID],
+	  	'CALL insert_layer_junction(?,?)',
+	  	[req.body.BaseLayerID, req.body.LinkedLayerID],
 	  function(err,rows){
 	    if(err) throw err;
-	    console.log('User DOB updated in Db\n');
-	    console.log(rows);
-	  }
-	)
-};
+	    console.log(req.body.BaseLayerID + ' linked to ' + req.body.LinkedLayerID);
+	  })
+});
 
-//Delete a User
-if (deleteUser == true) {
-	con.query(
-	  'CALL delete_user(?)',
-	  [input_UserID],
-	  function(err,rows){
-	    if(err) throw err;
-	    console.log('User deleted in Db\n');
-	    console.log(rows);
-	  }
-	)
-};
-
+//Tells Express to listen on port 3000 (http://localhost:3000/)
 app.listen(3000);
 console.log("Server running on port 3000");

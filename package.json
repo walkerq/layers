@@ -1,0 +1,28 @@
+{
+  "name": "layers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "angular-route": "^1.5.3",
+    "body-parser": "^1.15.0",
+    "createjs-soundjs": "^0.6.2",
+    "mysql": "^2.10.2",
+    "express": "^4.13.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/walkerq/layers.git"
+  },
+  "author": "walker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/walkerq/layers/issues"
+  },
+  "homepage": "https://github.com/walkerq/layers#readme"
+}

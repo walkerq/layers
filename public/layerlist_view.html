@@ -1,0 +1,64 @@
+<!DOCTYPE>
+<html ng-app="myApp">
+<head>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<title>All Layers</title>
+
+</head>
+<body>
+
+	<div class='btn-toolbar pull-right'>
+		<div class='btn-group'>
+			<a href="#/signup" class='btn btn-warning'>Sign-up!</a>
+		</div>
+	</div>
+	<h1><a href="#/layers/"><strong>Layers</strong></a></h1>
+
+	<div class="container" ng-controller="AppCtrl">
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Artist</th>
+					<th>Length (s)</th>
+					<th>File Path</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>{{layer.data[0].LayerID}}</td>
+					<td><input class="form-control" ng-model="layer.data[0].LayerName"></td>
+					<td><input class="form-control" ng-model="layer.data[0].Username"></td>
+					<td><input class="form-control" ng-model="layer.data[0].Length_of_Layer"></td>
+					<td><input class="form-control" ng-model="layer.data[0].FileLayer"></td>
+
+					<td><button class="btn btn-primary" ng-click="addLayer()">Upload</td>
+					<td><button class="btn btn-primary" ng-click="updateLayer()">Update</td>
+				</tr>
+				<tr ng-repeat="layer in layers.data | filter:layer.data[0].LayerName | filter:layer.data[0].Username | filter:layer.data[0].Length_of_Layer | filter:layer.data[0].FilePath">
+					<td>{{layer.LayerID}}</td>
+					<td><a href="#/layers/{{layer.LayerID}}">{{layer.LayerName}}</a></td>
+					<td><a href="#/artists/{{layer.Username}}">{{layer.Username}}</td>
+					<td>{{layer.Length_of_Layer}}</td>
+					<td>{{layer.FileLayer}}</td>
+					<td><button class="btn btn-primary" ng-click="download
+						(layer.LayerID)">Download</button>
+						<td><button class="btn btn-success" ng-click="editLayer(layer.LayerID)">Edit</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.js"></script>
+		<script src="controllers/app.js"></script>
+	</body>
+	</html>
