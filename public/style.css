@@ -1,0 +1,18 @@
+#bootstrap-overrides {
+	background-color: black;
+}
+/*	background-color: #E3F2FD;
+*/
+
+@font-face {
+  font-family: 'Conso';
+  src: url("Conso.woff") format("woff"), url("Conso.ttf") format("truetype");
+  font-style: normal;
+  font-stretch: normal; }
+@font-face {
+  font-family: 'Conso';
+  src: url("Conso-Italic.woff") format("woff"), url("Conso-Italic.ttf") format("truetype");
+  font-style: italic;
+  font-stretch: normal; }
+article, details, footer, header, nav, section {
+  display: block; }

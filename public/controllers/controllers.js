@@ -1,8 +1,10 @@
-var myAppControllers = angular.module('myAppControllers', []);
+var myAppControllers = angular.module('myAppControllers', ['angularFileUpload']);
 
-myAppControllers.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
+myAppControllers.controller('AppCtrl', ['$scope', '$http', function($scope, $http, FileUploader) {
     $scope.layer = ""
-    console.log($scope.layer + "layer");
+/*    console.log($scope.layer + "layer");
+    $scope.uploader = new FileUploader();
+*/
 
   var refresh = function() {
     $http.get('/layers').then(function(response) {

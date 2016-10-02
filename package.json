@@ -4,11 +4,13 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
+    "angular-file-upload": "^2.3.4",
     "angular-route": "^1.5.3",
     "body-parser": "^1.15.0",
     "createjs-soundjs": "^0.6.2",
-    "mysql": "^2.10.2",
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "ipfs-api": "^8.0.3",
+    "mysql": "^2.10.2"
   },
   "devDependencies": {},
   "scripts": {

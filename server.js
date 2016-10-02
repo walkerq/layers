@@ -4,16 +4,13 @@ var bodyParser = require('body-parser');
 var mysql = require("mysql");
 // var createjs = require("createjs-soundjs")
 
+//Express
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 
-//do music stuff:
-/*createjs.Sound.on("fileload", handleLoadComplete);
-createjs.Sound.alternateExtensions = ["mp3"];
-createjs.Sound.registerSound({src:"public/music/Nikes.mp3", id:"nikes"});
-function handleLoadComplete(event) {
-    createjs.Sound.play("nikes");
-}
+// connect to IPFS daemon API server
+/*var ipfsAPI = require('ipfs-api')
+var ipfs = ipfsAPI('localhost', '5001', {protocol: 'http'}) // broken
 */
 
 //Creates connection to the MySQL database
@@ -33,10 +30,7 @@ con.connect(function(err){
   console.log('Connection established'); 
 });
 
-/* Model Query Handlers (app.get, app.post, or app.put):
-use http objects to receive data from a controller in app.js,
-use Node-MySQL to form database queries, and
-send query results back to controller as JSON */
+/* Express routes */
 app.get('/layers/', function (req, res) {
 	con.query(
 	  	'SELECT * FROM layer a ',
@@ -48,6 +42,19 @@ app.get('/layers/', function (req, res) {
 });
 
 app.post('/addLayer', function (req, res) {
+
+	/*Uploading layer file*/
+	// 1 TO-DO: Preprocessing: is the file ok to upload?
+		// 1.1 TO-DO: User-enters layer metadata
+		// 1.2 TO-DO: Client-side service collects layer metadata
+
+	/*Uploading files*/
+	// 1 TO-DO: Add layer file to local drive. Currently, dumping all layers into same folder
+		// 1.1 TO-DO: Save metadata in MySQL
+	// (Eventually, add layer file to IPFS, once IPFS infrastructure is easier to use)
+
+
+
 	con.query(
 	  	'CALL insert_layer(?,?,?,?)',
 	  	[req.body.data[0].LayerName,req.body.data[0].Length_of_Layer,

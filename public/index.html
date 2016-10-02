@@ -2,21 +2,29 @@
 <html ng-app="myApp">
 <head>
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+<!-- Style overrides -->
+<link rel="stylesheet" href="style/style.css">
 
 <title>All Layers</title>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.js"></script>
 <script src="controllers/app.js"></script>
 <script src="controllers/controllers.js"></script>
-<script src="http://code.createjs.com/soundjs-0.5.2.min.js"></script>
+<script src="dependencies/angular-file-upload.js"></script>
 
 </head>
-<body>
+<body id="bootstrap-overrides">
+
+<!-- 	<div id="upload-area" ng-controller='AppCtrl'>
+        <input type="file" nv-file-select uploader="uploader"/><br/>
+        <ul>
+            <li ng-repeat="item in uploader.queue">
+                Name: <span ng-bind="item.file.name"></span><br/>
+                <button ng-click="item.upload()">upload</button>
+            </li>
+        </ul>
+	</div> -->
+
   <div ng-view></div>
 </body>
 </html>
